@@ -16,14 +16,20 @@ const SUPPORTED_CITIES: Record<string, string> = {
 };
 
 function resolveCity(searchParams: Record<string, string | string[] | undefined>, headerCity: string | null): string {
-  // 1. Check UTM/query param ?city=augusta
-  const paramCity = typeof searchParams.city === "string" ? searchParams.city.toLowerCase() : null;
+  // 1. Check UTM/query param ?city=augusta (highest priority — newsletter links)
+  const paramCity = typeof searchParams.city === "string" ? searchParams.city.toLowerCase().trim() : null;
   if (paramCity && SUPPORTED_CITIES[paramCity]) return SUPPORTED_CITIES[paramCity];
 
-  // 2. Check Vercel geolocation header
+  // 2. Check Vercel geolocation header (auto-detect for organic traffic)
   if (headerCity) {
-    const normalized = headerCity.toLowerCase();
-    if (SUPPORTED_CITIES[normalized]) return SUPPORTED_CITIES[normalized];
+    // Vercel URL-encodes the city name, decode it first
+    const decoded = decodeURIComponent(headerCity).toLowerCase().trim();
+    // Exact match
+    if (SUPPORTED_CITIES[decoded]) return SUPPORTED_CITIES[decoded];
+    // Partial match — handles "North Augusta" → "Augusta", "East Atlanta" → "Atlanta"
+    for (const [key, value] of Object.entries(SUPPORTED_CITIES)) {
+      if (decoded.includes(key)) return value;
+    }
   }
 
   // 3. Default
