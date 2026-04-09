@@ -211,7 +211,7 @@ export default async function AgencyLandingPage({
                     alt={logo.alt}
                     width={100}
                     height={36}
-                    className={`object-contain h-12 w-auto opacity-60 grayscale${logo.invert ? " invert" : ""}`}
+                    className={`object-contain h-12 w-auto grayscale opacity-40${logo.invert ? " invert" : ""}`}
                   />
                 ))}
               </div>
