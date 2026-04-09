@@ -36,6 +36,12 @@ function resolveCity(searchParams: Record<string, string | string[] | undefined>
   return DEFAULT_CITY;
 }
 
+const CITY_MOCKUPS: Record<string, string> = {
+  Athens: "/agency/screenshots/athens-plumbing-site.png",
+  Augusta: "/agency/screenshots/augusta-plumbing-site.png",
+  Atlanta: "/agency/screenshots/atlanta-plumbing-site.png",
+};
+
 export const metadata: Metadata = {
   title: `${BRAND} — Website Design & Marketing Systems For Local Businesses`,
   description: `Cut the bullsh*t. Marketing isn't rocket science. Simple systems for local businesses at $297/mo. No contracts.`,
@@ -64,11 +70,12 @@ const builtFor = [
   { label: "General Contractors", img: "/agency/trades/general-contractors.jpg" },
 ];
 
-const features = [
+function getFeatures(city: string) {
+  return [
   {
     name: "Functional Website",
     tagline: "Get a website that instantly turns leads into text conversations that go DIRECTLY to your phone.",
-    mockup: "/agency/screenshots/athens-plumbing-site.png",
+    mockup: CITY_MOCKUPS[city] || CITY_MOCKUPS.Athens,
     benefits: [
       { h: "Actually Get Found Online", p: "If a customer googles your business and can't find you, that might be awkward... Don't worry, we won't let that happen." },
       { h: "Showcase Your Best Reviews", p: "We all have one or two bad reviews... That doesn't mean your customers need to see them." },
@@ -116,6 +123,7 @@ const features = [
     ],
   },
 ];
+}
 
 const pricingFeatures = [
   "Functional Website",
@@ -172,6 +180,7 @@ export default async function AgencyLandingPage({
   const headersList = await headers();
   const vercelCity = headersList.get("x-vercel-ip-city");
   const CITY = resolveCity(params, vercelCity);
+  const features = getFeatures(CITY);
 
   return (
     <div className="bg-agency-bg text-agency-text">
@@ -223,7 +232,7 @@ export default async function AgencyLandingPage({
               </div>
             </div>
             <div className="hidden lg:flex justify-center lg:justify-end">
-              <PhoneMockup type="/agency/screenshots/athens-plumbing-site.png" />
+              <PhoneMockup type={CITY_MOCKUPS[CITY] || CITY_MOCKUPS.Athens} />
             </div>
           </div>
         </div>
