@@ -18,6 +18,17 @@ const sourceSans = Source_Sans_3({
 export const metadata: Metadata = {
   title: "Sharpe Systems — Marketing Systems For Local Businesses",
   description: "Simple marketing systems for local businesses at $297/mo. No contracts. No BS.",
+  openGraph: {
+    title: "Sharpe Systems — Marketing Systems For Local Businesses",
+    description: "Simple marketing systems for local businesses at $297/mo. No contracts. No BS.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sharpe Systems — Marketing Systems For Local Businesses",
+    description: "Simple marketing systems for local businesses at $297/mo. No contracts. No BS.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

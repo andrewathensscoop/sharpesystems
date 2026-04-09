@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#1a1a2e"/>
+  <!-- Logo icon -->
+  <path d="M480 390L510 310h30L510 390h-30Z" fill="#e63946"/>
+  <path d="M500 410L530 330h30L530 410h-30Z" fill="#e63946" opacity="0.6"/>
+  <!-- SHARPE -->
+  <text x="570" y="355" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="64" letter-spacing="4" fill="#ffffff">SHARPE</text>
+  <!-- SYSTEMS -->
+  <text x="570" y="405" font-family="system-ui, -apple-system, sans-serif" font-weight="400" font-size="36" letter-spacing="8" fill="rgba(255,255,255,0.5)">SYSTEMS</text>
+</svg>
