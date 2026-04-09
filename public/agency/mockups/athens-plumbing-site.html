@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Athens Plumbing Co</title>
+<style>
+html, body { overflow-x: hidden; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #1a2332; }
+
+/* Nav */
+.nav { background: #fff; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e5e7eb; }
+.nav-logo { font-size: 16px; font-weight: 800; color: #1a2332; }
+.nav-logo span { color: #2b7a9e; }
+.nav-links { display: flex; gap: 6px; }
+.nav-link { font-size: 13px; font-weight: 700; padding: 8px 14px; border-radius: 6px; border: 2px solid #2b7a9e; color: #2b7a9e; }
+.nav-link.filled { background: #2b7a9e; color: #fff; border-color: #2b7a9e; }
+
+/* Promo bar */
+.promo { background: #f0f9ff; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #bae6fd; }
+.promo-text { font-size: 13px; color: #1a2332; }
+.promo-btn { font-size: 12px; font-weight: 700; color: #2b7a9e; background: #e0f2fe; padding: 5px 12px; border-radius: 14px; }
+
+/* Hero */
+.hero { background: linear-gradient(180deg, #1a3c50 0%, #2b7a9e 100%); padding: 36px 20px 40px; text-align: center; }
+.hero-eyebrow { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 10px; }
+.hero h1 { font-size: 30px; font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 14px; }
+.hero-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.5; margin-bottom: 24px; padding: 0 8px; }
+.hero-btns { display: flex; gap: 10px; justify-content: center; }
+.btn-outline { padding: 12px 24px; border: 2px solid #fff; border-radius: 6px; font-size: 15px; font-weight: 700; color: #fff; }
+.btn-filled { padding: 12px 24px; background: #fff; border: 2px solid #fff; border-radius: 6px; font-size: 15px; font-weight: 700; color: #1a3c50; }
+
+/* Call bar */
+.call-bar { background: #16a34a; padding: 14px 16px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.call-bar-text { font-size: 15px; font-weight: 700; color: #fff; }
+
+/* Section */
+.section { padding: 28px 20px; }
+.section-alt { background: #f8fafc; }
+.section-dark { background: #1a2332; }
+.section-title { font-size: 22px; font-weight: 900; line-height: 1.2; margin-bottom: 14px; color: #1a2332; }
+.section-title-w { color: #fff; }
+.section-desc { font-size: 14px; color: #64748b; line-height: 1.6; }
+
+/* Services */
+.svc-list { margin-top: 16px; }
+.svc-item { display: flex; align-items: center; gap: 14px; padding: 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 8px; }
+.svc-icon { width: 44px; height: 44px; border-radius: 10px; background: #e0f2fe; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; color: #2b7a9e; }
+.svc-name { font-size: 15px; font-weight: 700; color: #1a2332; }
+.svc-desc { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+
+/* Why choose */
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+.why-item { padding: 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; }
+.why-num { font-size: 24px; font-weight: 900; color: #2b7a9e; margin-bottom: 4px; }
+.why-label { font-size: 13px; font-weight: 700; color: #1a2332; }
+.why-desc { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+
+/* Reviews */
+.review { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; margin-bottom: 10px; }
+.review-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.review-av { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0; }
+.review-name { font-size: 14px; font-weight: 700; color: #1a2332; }
+.review-date { font-size: 11px; color: #94a3b8; }
+.review-stars { color: #fbbf24; font-size: 14px; letter-spacing: 1px; margin-bottom: 6px; }
+.review-text { font-size: 13px; color: #475569; line-height: 1.5; font-style: italic; }
+
+/* Areas */
+.area-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.area-tag { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.8); }
+.area-tag.active { background: #2b7a9e; color: #fff; border-color: #2b7a9e; }
+
+/* CTA */
+.cta { background: #2b7a9e; padding: 36px 20px; text-align: center; }
+.cta h2 { font-size: 24px; font-weight: 900; color: #fff; margin-bottom: 8px; line-height: 1.2; }
+.cta p { font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 20px; }
+.cta-btn { display: inline-block; background: #fff; color: #1a3c50; font-size: 16px; font-weight: 800; padding: 14px 36px; border-radius: 8px; }
+
+/* Footer */
+.footer { background: #111827; padding: 24px 20px 16px; }
+.footer-logo { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.footer-logo span { color: #2b7a9e; }
+.footer-desc { font-size: 11px; color: rgba(255,255,255,0.3); line-height: 1.5; margin-bottom: 14px; }
+.footer-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px; }
+.footer-col-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.2); margin-bottom: 8px; }
+.footer-link { display: block; font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 5px; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px; font-size: 10px; color: rgba(255,255,255,0.15); text-align: center; }
+</style>
+</head>
+<body>
+
+<div style="height:48px;background:#fff;"></div>
+<div class="nav">
+  <div class="nav-logo">Athens <span>Plumbing</span> Co</div>
+  <div class="nav-links">
+    <span class="nav-link">Call Now</span>
+    <span class="nav-link filled">Get a Quote</span>
+  </div>
+</div>
+
+<div class="promo">
+  <span class="promo-text">We Offer Financing</span>
+  <span class="promo-btn">Learn More</span>
+</div>
+
+<div class="hero">
+  <p class="hero-eyebrow">Need a Plumber in Athens, GA?</p>
+  <h1>Your Trusted Local Plumbing Experts</h1>
+  <p class="hero-desc">Got plumbing problems that won't quit? At Athens Plumbing Co, we've got the fix for all your plumbing headaches.</p>
+  <div class="hero-btns">
+    <span class="btn-outline">Call Now</span>
+    <span class="btn-filled">Book Online</span>
+  </div>
+</div>
+
+<div class="call-bar">
+  <span class="call-bar-text">Call Now 706-555-0123</span>
+</div>
+
+<div class="section">
+  <div class="section-title">Our Plumbing Services</div>
+  <div class="section-desc">Full-service plumbing for homes and businesses across Athens.</div>
+  <div class="svc-list">
+    <div class="svc-item">
+      <div class="svc-icon">W</div>
+      <div><div class="svc-name">Emergency Repairs</div><div class="svc-desc">24/7 same-day emergency plumbing service</div></div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-icon">H</div>
+      <div><div class="svc-name">Water Heater Service</div><div class="svc-desc">Installation, repair, and replacement</div></div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-icon">D</div>
+      <div><div class="svc-name">Drain Cleaning</div><div class="svc-desc">Camera inspection and fast unclogging</div></div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-icon">S</div>
+      <div><div class="svc-name">Sewer Line Repair</div><div class="svc-desc">Trenchless repair and full replacement</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="section-title">Why Choose Athens Plumbing Co?</div>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-num">8+</div>
+      <div class="why-label">Years in Business</div>
+      <div class="why-desc">Serving Athens since 2015</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">127</div>
+      <div class="why-label">5-Star Reviews</div>
+      <div class="why-desc">4.9 rating on Google</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">24/7</div>
+      <div class="why-label">Availability</div>
+      <div class="why-desc">Emergency service anytime</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">$0</div>
+      <div class="why-label">Free Estimates</div>
+      <div class="why-desc">No hidden fees or surprises</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">What Our Customers Say</div>
+  <div class="review">
+    <div class="review-head"><div class="review-av" style="background:#2563eb;">JD</div><div><div class="review-name">James D.</div><div class="review-date">2 weeks ago</div></div></div>
+    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <div class="review-text">"Called at 9pm with a burst pipe. They were at my house in 30 minutes. Fixed it fast and the price was exactly what they quoted."</div>
+  </div>
+  <div class="review">
+    <div class="review-head"><div class="review-av" style="background:#7c3aed;">SM</div><div><div class="review-name">Sarah M.</div><div class="review-date">1 month ago</div></div></div>
+    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <div class="review-text">"New water heater installed same week I called. Professional, on time, and reasonably priced. Already recommended them."</div>
+  </div>
+  <div class="review">
+    <div class="review-head"><div class="review-av" style="background:#059669;">RK</div><div><div class="review-name">Robert K.</div><div class="review-date">3 weeks ago</div></div></div>
+    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <div class="review-text">"Finally a plumber who actually picks up the phone. Fair price, friendly guys. Will definitely call again."</div>
+  </div>
+</div>
+
+<div class="section section-dark">
+  <div class="section-title section-title-w">Service Areas</div>
+  <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:4px;">Proudly serving Clarke County and surrounding areas.</p>
+  <div class="area-tags">
+    <span class="area-tag active">Athens</span>
+    <span class="area-tag">Watkinsville</span>
+    <span class="area-tag">Winterville</span>
+    <span class="area-tag">Bogart</span>
+    <span class="area-tag">Hull</span>
+    <span class="area-tag">Monroe</span>
+  </div>
+</div>
+
+<div class="cta">
+  <h2>Ready to Fix Your Plumbing?</h2>
+  <p>Get a free quote today. No commitment, no pressure.</p>
+  <span class="cta-btn">Get A Free Quote</span>
+</div>
+
+<div class="footer">
+  <div class="footer-logo">Athens <span>Plumbing</span> Co</div>
+  <div class="footer-desc">Licensed, insured, and proudly serving Athens since 2015.</div>
+  <div class="footer-cols">
+    <div><div class="footer-col-title">Services</div><a class="footer-link">Emergency Repairs</a><a class="footer-link">Water Heaters</a><a class="footer-link">Drain Cleaning</a><a class="footer-link">Sewer Lines</a></div>
+    <div><div class="footer-col-title">Company</div><a class="footer-link">About Us</a><a class="footer-link">Reviews</a><a class="footer-link">Service Areas</a><a class="footer-link">Contact</a></div>
+  </div>
+  <div class="footer-bottom">&copy; 2025 Athens Plumbing Co &middot; (706) 555-0123</div>
+</div>
+
+</body>
+</html>

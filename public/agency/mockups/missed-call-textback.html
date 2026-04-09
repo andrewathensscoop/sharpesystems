@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Messages</title>
+<style>
+  html { overflow: hidden; width: 100%; } * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  html, body { width: 100%; position: relative; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; background: #fff; overflow: hidden; }
+
+  .status { height: 44px; background: #f6f6f6; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+  .time { font-size: 16px; font-weight: 700; color: #000; }
+  .icons { display: flex; gap: 4px; align-items: center; font-size: 12px; color: #000; }
+  .batt { width: 24px; height: 11px; border: 2px solid #000; border-radius: 3px; position: relative; }
+  .batt::after { content:''; position: absolute; right: -4px; top: 2.5px; width: 2px; height: 5px; background: #000; border-radius: 0 1px 1px 0; }
+  .batt-fill { position: absolute; left: 1px; top: 1px; bottom: 1px; width: 72%; background: #34c759; border-radius: 1px; }
+
+  .nav { background: #f6f6f6; border-bottom: 0.5px solid #c6c6c8; padding: 4px 16px 14px; display: flex; align-items: center; }
+  .back { color: #007aff; font-size: 30px; line-height: 1; margin-right: 6px; text-decoration: none; }
+  .contact { flex: 1; text-align: center; }
+  .contact-av { width: 36px; height: 36px; border-radius: 50%; background: #e0e0e0; margin: 0 auto 4px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #999; }
+  .contact-name { font-size: 15px; font-weight: 700; color: #000; }
+
+  .chat { padding: 14px 14px 66px; height: calc(700px - 44px - 62px); overflow: hidden; }
+  .ts { font-size: 12px; color: #8e8e93; text-align: center; padding: 6px 0 14px; }
+  .missed { text-align: center; padding: 6px 0 14px; }
+  .missed-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; color: #ff3b30; font-weight: 600; }
+  .missed-time { font-size: 11px; color: #8e8e93; margin-top: 3px; }
+
+  .row { display: flex; margin-bottom: 4px; width: 100%; }
+  .row.out { justify-content: flex-end; }
+  .row.in { justify-content: flex-start; }
+  .bub { max-width: 270px; padding: 11px 16px; font-size: 17px; line-height: 1.35; border-radius: 20px; word-wrap: break-word; }
+  .bub.blue { background: #007aff; color: #fff; border-bottom-right-radius: 5px; }
+  .bub.gray { background: #e9e9eb; color: #000; border-bottom-left-radius: 5px; }
+  .receipt { font-size: 11px; color: #8e8e93; text-align: right; padding: 2px 6px 0; margin-bottom: 10px; }
+  .gap { height: 8px; }
+
+  .input-bar { position: absolute; bottom: 0; left: 0; width: 100%; height: 58px; background: #f6f6f6; border-top: 0.5px solid #c6c6c8; display: flex; align-items: center; padding: 0 10px; gap: 8px; }
+  .plus { width: 34px; height: 34px; border-radius: 50%; background: #e5e5e5; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #999; }
+  .field { flex: 1; height: 38px; background: #fff; border: 1px solid #c6c6c8; border-radius: 20px; padding: 0 16px; font-size: 16px; color: #c7c7cc; display: flex; align-items: center; }
+  .send { width: 32px; height: 32px; border-radius: 50%; background: #007aff; display: flex; align-items: center; justify-content: center; }
+  .send span { color: #fff; font-size: 18px; font-weight: 800; margin-top: -1px; }
+</style>
+</head>
+<body>
+  <div class="status"><span class="time">2:34</span><div class="icons"><span>5G</span><div class="batt"><div class="batt-fill"></div></div></div></div>
+  <div class="nav"><a class="back">&#8249;</a><div class="contact"><div class="contact-av">AP</div><div class="contact-name">Athens Plumbing Co</div></div><div style="width:24px"></div></div>
+
+  <div class="chat">
+    <div class="ts">Today 2:34 PM</div>
+    <div class="missed"><div class="missed-badge">&#9742; Missed Call</div><div class="missed-time">2:34 PM</div></div>
+
+    <div class="row out"><div class="bub blue">Hey! Sorry we missed your call. How can we help you today? &#128578;</div></div>
+    <div class="receipt">Delivered</div>
+    <div class="gap"></div>
+
+    <div class="row in"><div class="bub gray">I need a quote for a water heater install.</div></div>
+    <div class="gap"></div>
+
+    <div class="row out"><div class="bub blue">Absolutely! I'll have someone reach out within 10 minutes. What's your address?</div></div>
+    <div class="receipt">Read 2:36 PM</div>
+    <div class="gap"></div>
+
+    <div class="row in"><div class="bub gray">247 Oak Street, Athens. Thanks!</div></div>
+    <div class="gap"></div>
+
+    <div class="row out"><div class="bub blue">Perfect, we'll be in touch shortly! &#128077;</div></div>
+    <div class="receipt">Read 2:38 PM</div>
+  </div>
+
+  <div class="input-bar"><div class="plus">+</div><div class="field">iMessage</div><div class="send"><span>&#8593;</span></div></div>
+</body>
+</html>

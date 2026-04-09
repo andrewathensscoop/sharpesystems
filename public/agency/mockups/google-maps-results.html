@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Google Search</title>
+<style>
+  html { overflow: hidden; width: 100%; } * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  html, body { width: 100%; position: relative; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background: #fff; color: #202124; overflow: hidden; }
+
+  .search { padding: 12px 14px; padding-top: 48px; background: #fff; }
+  .search-box { width: 100%; height: 48px; background: #f1f3f4; border-radius: 24px; padding: 0 18px; font-size: 17px; color: #202124; display: flex; align-items: center; justify-content: space-between; }
+  .search-icon { font-size: 18px; color: #4285f4; }
+
+  .tabs { display: flex; border-bottom: 2px solid #e8eaed; padding: 0 10px; background: #fff; }
+  .tab { padding: 12px 16px; font-size: 14px; color: #5f6368; font-weight: 500; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+  .tab.active { color: #1a73e8; border-bottom-color: #1a73e8; font-weight: 600; }
+
+  .map { height: 170px; position: relative; overflow: hidden; background: linear-gradient(180deg, #c8e6c0 0%, #b8d8b0 40%, #d4e8c8 100%); }
+  /* Roads */
+  .road-h { position: absolute; left: 0; right: 0; background: #fff; }
+  .road-v { position: absolute; top: 0; bottom: 0; background: #fff; }
+  .road-main { background: #fde68a; }
+  .block { position: absolute; background: rgba(180,200,170,0.6); border-radius: 2px; }
+  /* Water feature */
+  .water { position: absolute; background: #93c5fd; border-radius: 50%; opacity: 0.4; }
+  /* Labels */
+  .road-label { position: absolute; font-size: 8px; color: #5f6368; font-weight: 500; letter-spacing: 0.3px; background: rgba(200,230,192,0.7); padding: 1px 3px; border-radius: 2px; }
+  .area-label { position: absolute; font-size: 10px; color: #1a73e8; font-weight: 600; }
+  /* Pins */
+  .pin { position: absolute; z-index: 2; }
+  .pin-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+  .pin-dot.red { background: #ea4335; }
+  .pin-dot.blue { background: #4285f4; }
+  /* Controls */
+  .map-ctrl { position: absolute; bottom: 10px; right: 10px; display: flex; flex-direction: column; background: #fff; border-radius: 6px; box-shadow: 0 1px 5px rgba(0,0,0,0.2); }
+  .map-ctrl button { width: 32px; height: 32px; border: none; background: #fff; font-size: 18px; color: #666; cursor: pointer; }
+  .map-ctrl button:first-child { border-bottom: 1px solid #e5e5e5; border-radius: 6px 6px 0 0; }
+  .map-ctrl button:last-child { border-radius: 0 0 6px 6px; }
+  .gps-btn { position: absolute; bottom: 10px; right: 48px; width: 32px; height: 32px; background: #fff; border-radius: 6px; box-shadow: 0 1px 5px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 14px; color: #666; }
+  .map-bottom { position: absolute; bottom: 8px; left: 10px; font-size: 9px; color: #70757a; background: rgba(255,255,255,0.8); padding: 2px 6px; border-radius: 3px; }
+
+  .results { padding: 0; }
+  .result { padding: 16px; border-bottom: 1px solid #e8eaed; }
+  .r-name { font-size: 18px; font-weight: 500; color: #1a0dab; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+  .r-name.top { font-weight: 700; }
+  .sponsored { font-size: 11px; color: #70757a; background: #f1f3f4; padding: 2px 7px; border-radius: 4px; font-weight: 500; }
+  .r-rating { display: flex; align-items: center; gap: 5px; margin-bottom: 4px; }
+  .r-score { font-size: 14px; font-weight: 600; color: #202124; }
+  .r-stars { color: #fbbf24; font-size: 16px; letter-spacing: 1px; }
+  .r-count { font-size: 14px; color: #70757a; }
+  .r-meta { font-size: 14px; color: #4d5156; margin-bottom: 12px; }
+  .r-open { color: #188038; font-weight: 600; }
+  .r-closed { color: #c5221f; font-weight: 600; }
+  .r-pills { display: flex; gap: 8px; }
+  .pill { font-size: 13px; color: #1a73e8; font-weight: 600; padding: 8px 16px; border: 1.5px solid #dadce0; border-radius: 20px; background: #fff; display: inline-flex; align-items: center; gap: 5px; }
+</style>
+</head>
+<body>
+  <div class="search"><div class="search-box"><span>plumber near me</span><span class="search-icon">&#128269;</span></div></div>
+  <div class="tabs">
+    <div class="tab active">All</div>
+    <div class="tab">Maps</div>
+    <div class="tab">Images</div>
+    <div class="tab">Shopping</div>
+    <div class="tab">News</div>
+  </div>
+
+  <div class="map">
+    <!-- Blocks -->
+    <div class="block" style="top:8px;left:15px;width:55px;height:35px;"></div>
+    <div class="block" style="top:12px;left:110px;width:70px;height:30px;"></div>
+    <div class="block" style="top:55px;left:230px;width:45px;height:42px;"></div>
+    <div class="block" style="top:85px;left:25px;width:65px;height:28px;"></div>
+    <div class="block" style="top:72px;left:140px;width:40px;height:38px;"></div>
+    <div class="block" style="top:8px;left:270px;width:55px;height:28px;"></div>
+    <div class="block" style="top:110px;left:190px;width:50px;height:25px;"></div>
+    <div class="block" style="top:130px;left:40px;width:45px;height:20px;"></div>
+    <!-- Water -->
+    <div class="water" style="top:100px;left:280px;width:80px;height:60px;"></div>
+    <!-- Main roads -->
+    <div class="road-h road-main" style="top:50px;height:5px;"></div>
+    <div class="road-v road-main" style="left:108px;width:5px;"></div>
+    <!-- Secondary roads -->
+    <div class="road-h" style="top:25px;height:2px;"></div>
+    <div class="road-h" style="top:90px;height:2px;"></div>
+    <div class="road-h" style="top:125px;height:2px;"></div>
+    <div class="road-h" style="top:150px;height:2px;"></div>
+    <div class="road-v" style="left:55px;width:2px;"></div>
+    <div class="road-v" style="left:195px;width:2px;"></div>
+    <div class="road-v" style="left:275px;width:2px;"></div>
+    <!-- Road labels -->
+    <div class="road-label" style="top:42px;left:125px;">Broad St</div>
+    <div class="road-label" style="top:60px;left:96px;transform:rotate(-90deg);transform-origin:left;">College Ave</div>
+    <div class="road-label" style="top:83px;left:210px;">Milledge Ave</div>
+    <!-- Area label -->
+    <div class="area-label" style="bottom:30px;left:14px;">Athens, GA</div>
+    <!-- Pins -->
+    <div class="pin" style="top:30px;left:92px;"><div class="pin-dot red">1</div></div>
+    <div class="pin" style="top:65px;left:210px;"><div class="pin-dot blue">2</div></div>
+    <div class="pin" style="top:18px;left:265px;"><div class="pin-dot blue">3</div></div>
+    <!-- Controls -->
+    <div class="gps-btn">&#9737;</div>
+    <div class="map-ctrl"><button>+</button><button>&minus;</button></div>
+    <div class="map-bottom">Map data &copy;2025 Google</div>
+  </div>
+
+  <div class="results">
+    <div class="result">
+      <div class="r-name top">Athens Plumbing Co <span class="sponsored">Sponsored</span></div>
+      <div class="r-rating">
+        <span class="r-score">4.9</span>
+        <span class="r-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="r-count">(127)</span>
+      </div>
+      <div class="r-meta">Plumber &middot; <span class="r-open">Open now</span> &middot; 0.3 mi</div>
+      <div class="r-pills">
+        <span class="pill">&#9742; Call</span>
+        <span class="pill">&#9899; Directions</span>
+        <span class="pill">&#127760; Website</span>
+      </div>
+    </div>
+    <div class="result">
+      <div class="r-name">Quick Fix Plumbing</div>
+      <div class="r-rating">
+        <span class="r-score">4.2</span>
+        <span class="r-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+        <span class="r-count">(43)</span>
+      </div>
+      <div class="r-meta">Plumber &middot; <span class="r-open">Open now</span> &middot; 1.1 mi</div>
+      <div class="r-pills">
+        <span class="pill">&#9742; Call</span>
+        <span class="pill">&#9899; Directions</span>
+        <span class="pill">&#127760; Website</span>
+      </div>
+    </div>
+    <div class="result" style="border:none;">
+      <div class="r-name">Budget Plumbers LLC</div>
+      <div class="r-rating">
+        <span class="r-score">3.8</span>
+        <span class="r-stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+        <span class="r-count">(21)</span>
+      </div>
+      <div class="r-meta">Plumber &middot; <span class="r-closed">Closed</span> &middot; 3.2 mi</div>
+      <div class="r-pills">
+        <span class="pill">&#9742; Call</span>
+        <span class="pill">&#9899; Directions</span>
+        <span class="pill">&#127760; Website</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
