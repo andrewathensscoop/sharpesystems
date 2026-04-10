@@ -1,50 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { headers } from "next/headers";
 import { CalEmbed } from "@/components/ui/CalEmbed";
 import { LogoCarousel } from "@/components/agency/LogoCarousel";
 import { AgencyNavbar } from "@/components/agency/Navbar";
 
 const BRAND = "Sharpe Systems";
-const DEFAULT_CITY = "Athens";
-
-// Whitelist of cities we serve — prevents injection of random strings
-const SUPPORTED_CITIES: Record<string, string> = {
-  athens: "Athens",
-  augusta: "Augusta",
-  atlanta: "Atlanta",
-};
-
-function resolveCity(searchParams: Record<string, string | string[] | undefined>, headerCity: string | null): string {
-  // 1. Check UTM/query param ?city=augusta (highest priority — newsletter links)
-  const paramCity = typeof searchParams.city === "string" ? searchParams.city.toLowerCase().trim() : null;
-  if (paramCity && SUPPORTED_CITIES[paramCity]) return SUPPORTED_CITIES[paramCity];
-
-  // 2. Check Vercel geolocation header (auto-detect for organic traffic)
-  if (headerCity) {
-    // Vercel URL-encodes the city name, decode it first
-    const decoded = decodeURIComponent(headerCity).toLowerCase().trim();
-    // Exact match
-    if (SUPPORTED_CITIES[decoded]) return SUPPORTED_CITIES[decoded];
-    // Partial match — handles "North Augusta" → "Augusta", "East Atlanta" → "Atlanta"
-    for (const [key, value] of Object.entries(SUPPORTED_CITIES)) {
-      if (decoded.includes(key)) return value;
-    }
-  }
-
-  // 3. Default
-  return DEFAULT_CITY;
-}
-
-const CITY_MOCKUPS: Record<string, string> = {
-  Athens: "/agency/screenshots/athens-plumbing-site.png",
-  Augusta: "/agency/screenshots/augusta-plumbing-site.png",
-  Atlanta: "/agency/screenshots/atlanta-plumbing-site.png",
-};
+const CITY = "Georgia";
 
 export const metadata: Metadata = {
-  title: `${BRAND} — Website Design & Marketing Systems For Local Businesses`,
-  description: `Cut the bullsh*t. Marketing isn't rocket science. Simple systems for local businesses at $297/mo. No contracts.`,
+  title: `${BRAND} — Website Design & Marketing Systems For ${CITY} Businesses`,
+  description: `Cut the bullsh*t. Marketing isn't rocket science. Simple systems for ${CITY} businesses at $297/mo. No contracts.`,
 };
 
 const builtFor = [
@@ -70,12 +35,11 @@ const builtFor = [
   { label: "General Contractors", img: "/agency/trades/general-contractors.jpg" },
 ];
 
-function getFeatures(city: string) {
-  return [
+const features = [
   {
     name: "Functional Website",
     tagline: "Get a website that instantly turns leads into text conversations that go DIRECTLY to your phone.",
-    mockup: CITY_MOCKUPS[city] || CITY_MOCKUPS.Athens,
+    mockup: "/agency/screenshots/athens-plumbing-site.png",
     benefits: [
       { h: "Actually Get Found Online", p: "If a customer googles your business and can't find you, that might be awkward... Don't worry, we won't let that happen." },
       { h: "Showcase Your Best Reviews", p: "We all have one or two bad reviews... That doesn't mean your customers need to see them." },
@@ -123,7 +87,6 @@ function getFeatures(city: string) {
     ],
   },
 ];
-}
 
 const pricingFeatures = [
   "Functional Website",
@@ -171,17 +134,7 @@ function PhoneMockup({ type }: { type: string }) {
   );
 }
 
-export default async function AgencyLandingPage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
-  const params = await searchParams;
-  const headersList = await headers();
-  const vercelCity = headersList.get("x-vercel-ip-city");
-  const CITY = resolveCity(params, vercelCity);
-  const features = getFeatures(CITY);
-
+export default function AgencyLandingPage() {
   return (
     <div className="bg-agency-bg text-agency-text">
       <AgencyNavbar />
@@ -232,7 +185,7 @@ export default async function AgencyLandingPage({
               </div>
             </div>
             <div className="hidden lg:flex justify-center lg:justify-end">
-              <PhoneMockup type={CITY_MOCKUPS[CITY] || CITY_MOCKUPS.Athens} />
+              <PhoneMockup type="/agency/screenshots/athens-plumbing-site.png" />
             </div>
           </div>
         </div>
