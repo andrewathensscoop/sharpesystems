@@ -486,7 +486,6 @@ export default function AgencyLandingPage() {
               <div className="flex flex-col gap-3 text-sm text-white/60">
                 <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
                 <a href="#schedule" className="hover:text-white transition-colors">Book A Demo</a>
-                <a href="mailto:hello@sharpesystems.com" className="hover:text-white transition-colors">Contact Us</a>
               </div>
             </div>
           </div>
