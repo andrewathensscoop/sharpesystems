@@ -4,11 +4,11 @@ import { useState } from "react";
 import { SharpeLogo } from "./Logo";
 
 const products = [
-  "Functional Website",
-  "5-Star Magic Review Funnel",
-  "Missed Call Text Back",
-  "One-Click Marketing Campaigns",
-  "On-Site SEO",
+  "24/7 Call Answering",
+  "Appointment Booking",
+  "Lead Qualification",
+  "FAQ Answering",
+  "Smart Call Transfers",
 ];
 
 export function AgencyNavbar() {
@@ -61,7 +61,7 @@ export function AgencyNavbar() {
             href="#schedule"
             className="px-5 py-2.5 bg-agency-accent text-white text-sm font-sans font-bold hover:bg-agency-accent-hover transition-colors rounded"
           >
-            Book A Call
+            Book a Demo
           </a>
         </div>
       </div>
